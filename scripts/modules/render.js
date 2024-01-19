@@ -1,26 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+import {getCurrentDateTime} from "./utils.js";
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <script type="module" src="scripts/index.js"></script>
-  <title>Weather</title>
-</head>
+export const renderWidgetToday = (widget) => {
 
-<body>
-
-  <div id="app"></div>
+  const { dayOfMonth, month, year, hours, minutes, dayOfWeek } = getCurrentDateTime();
 
 
-  <!-- <div class="widget">
+  widget.insertAdjacentHTML(
+    "beforeend",
+    `
     <div class="widget__today">
       <div class="widget__date-block">
-        <p class="widget__date">20 июн 2023</p>
-        <p class="widget__time">09:00</p>
-        <p class="widget__day">вторник</p>
+        <p class="widget__date">${dayOfMonth} ${dayOfWeek} ${year}</p>
+        <p class="widget__time">${hours}:${minutes}</p>
+        <p class="widget__day">${dayOfWeek}</p>
       </div>
       <div class="widget__icon">
         <img class="widget__img" src="./icon/01d.svg" alt="Погода">
@@ -35,7 +27,14 @@
         <p class="widget__temp-small">18.8 °C</p>
       </div>
     </div>
+    `
+  );
+};
 
+export const renderWidgetOther = (widget) => {
+  widget.insertAdjacentHTML(
+    "beforeend",
+    `
     <div class="widget__other">
       <div class="widget__wind">
         <p class="widget__wind-title">Ветер</p>
@@ -54,6 +53,14 @@
         <p class="widget__pressure-text">мм рт.ст.</p>
       </div>
     </div>
+    `
+  );
+};
+
+export const renderWidgetForecast = (widget) => {
+  widget.insertAdjacentHTML(
+    "beforeend",
+    `
     <ul class="widget__forecast">
       <li class="widget__day-item">
         <p class="widget__day-text">ср</p>
@@ -81,7 +88,6 @@
         <p class="widget__day-temp">17.3°/11.2°</p>
       </li>
     </ul>
-  </div> -->
-</body>
-
-</html>
+    `
+  );
+};
