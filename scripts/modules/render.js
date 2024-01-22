@@ -3,7 +3,6 @@ import {
   convertPressure,
   getCurrentDateTime,
   getWeatherForecastData,
-  getWindDirection,
 } from "./utils.js";
 
 export const renderWidgetToday = (widget, data) => {
@@ -39,6 +38,7 @@ export const renderWidgetToday = (widget, data) => {
 };
 
 export const renderWidgetOther = (widget, data) => {
+
   widget.insertAdjacentHTML(
     "beforeend",
     `
@@ -46,7 +46,7 @@ export const renderWidgetOther = (widget, data) => {
       <div class="widget__wind">
         <p class="widget__wind-title">Ветер</p>
         <p class="widget__wind-speed">${data.wind.speed} м/с</p>
-        <p class="widget__wind-text">${getWindDirection(data.wind.deg)}</p>
+        <p class="widget__wind-text" style="transform: rotate(${data.wind.deg}deg)">&#8595;</p>
 
       </div>
       <div class="widget__humidity">
@@ -70,7 +70,6 @@ export const renderWidgetOther = (widget, data) => {
 };
 
 export const renderWidgetForecast = (widget, data) => {
-  console.log("data: ", data);
 
   const widgetForecast = document.createElement("ul");
   widgetForecast.className = "widget__forecast";
@@ -96,6 +95,6 @@ export const renderWidgetForecast = (widget, data) => {
 };
 
 export const showError = (widget, error) => {
-  widget.textContent = error.toString();
+  widget.textContent = error?.toString();
   widget.classList.add("widget_error");
 };
